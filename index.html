@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAISH SOPTE // Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root {
+    --accent-color: #00d4ff;
+    --accent-glow: rgba(0, 212, 255, 0.6);
+    --accent-dim: rgba(0, 212, 255, 0.15);
+    --accent-secondary: #ff003c;
+    --bg-dark: #050510;
+    --bg-panel: rgba(10, 12, 28, 0.85);
+    --bg-panel-light: rgba(15, 18, 40, 0.9);
+    --text-primary: #e0e6ed;
+    --text-secondary: #8a92a6;
+    --border-glow: rgba(0, 212, 255, 0.3);
+  }
+
+  /* ===== TEXT SELECTION ===== */
+  ::selection {
+    background: var(--accent-color);
+    color: #050510;
+  }
+  ::-moz-selection {
+    background: var(--accent-color);
+    color: #050510;
+  }
+
+  /* ===== RESET ===== */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--bg-dark);
+    color: var(--text-primary);
+    font-family: 'Rajdhani', sans-serif;
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+  }
+
+  body, a, button, input, textarea {
+    cursor: none !important;
+  }
+
+  /* ===== CUSTOM CURSOR ===== */
+  .cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    background: var(--accent-color);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99999;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s, background 0.2s;
+    box-shadow: 0 0 10px var(--accent-color);
+  }
+
+  .cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--accent-color);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99999;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s, border-color 0.3s, opacity 0.3s;
+    opacity: 0.7;
+  }
+
+  .cursor-ring.hovering {
+    width: 60px;
+    height: 60px;
+    border-color: var(--accent-secondary);
+    background: rgba(255, 0, 60, 0.1);
+  }
+
+  .cursor-dot.hovering {
+    width: 16px;
+    height: 16px;
+    background: var(--accent-secondary);
+  }
+
+  /* ===== CYBERPUNK GRID BACKGROUND ===== */
+  .cyber-grid {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(var(--accent-dim) 1px, transparent 1px),
+      linear-gradient(90deg, var(--accent-dim) 1px, transparent 1px);
+    background-size: 50px 50px;
+    opacity: 0.4;
+    animation: gridMove 20s linear infinite;
+  }
+
+  @keyframes gridMove {
+    0% { background-position: 0 0; }
+    100% { background-position: 50px 50px; }
+  }
+
+  .cyber-scanline {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(to bottom, transparent 0%, transparent 50%, rgba(0, 212, 255, 0.03) 50%, transparent 51%);
+    background-size: 100% 4px;
+    opacity: 0.5;
+  }
+
+  .glow-orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.4;
+  }
+
+  .glow-orb-1 {
+    width: 400px;
+    height: 400px;
+    background: var(--accent-color);
+    top: -100px;
+    right: -100px;
+    animation: orbFloat 8s ease-in-out infinite;
+  }
+
+  .glow-orb-2 {
+    width: 300px;
+    height: 300px;
+    background: var(--accent-secondary);
+    bottom: 10%;
+    left: -50px;
+    animation: orbFloat 10s ease-in-out infinite reverse;
+  }
+
+  @keyframes orbFloat {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(30px, 40px); }
+  }
+
+  /* ===== NAVIGATION ===== */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(5, 5, 16, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-glow);
+    transition: padding 0.3s;
+  }
+
+  nav.scrolled {
+    padding: 15px 40px;
+  }
+
+  .nav-logo {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: 1.5rem;
+    color: var(--accent-color);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 0 0 15px var(--accent-glow);
+  }
+
+  .nav-logo span {
+    color: var(--accent-secondary);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    transition: color 0.3s;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent-color);
+    box-shadow: 0 0 10px var(--accent-color);
+    transition: width 0.3s;
+  }
+
+  .nav-links a:hover {
+    color: var(--accent-color);
+  }
+
+  .nav-links a:hover::after {
+    width: 100%;
+  }
+
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+  }
+
+  .menu-toggle span {
+    width: 25px;
+    height: 2px;
+    background: var(--accent-color);
+    box-shadow: 0 0 5px var(--accent-color);
+    transition: 0.3s;
+  }
+
+  /* ===== HERO SECTION ===== */
+  .hero {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 40px 40px;
+  }
+
+  .hero-content {
+    max-width: 1200px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .hero-text h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .hero-text h1 .glitch {
+    position: relative;
+    color: var(--accent-color);
+    text-shadow: 0 0 30px var(--accent-glow);
+  }
+
+  .hero-text h1 .glitch::before,
+  .hero-text h1 .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero-text h1 .glitch::before {
+    color: var(--accent-secondary);
+    animation: glitchAnim 3s infinite;
+    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+  }
+
+  .hero-text h1 .glitch::after {
+    color: var(--accent-color);
+    animation: glitchAnim 2s infinite reverse;
+    clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+  }
+
+  @keyframes glitchAnim {
+    0%, 100% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+  }
+
+  .hero-tag {
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--accent-secondary);
+    font-size: 1rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: inline-block;
+    padding: 5px 15px;
+    border: 1px solid var(--accent-secondary);
+    background: rgba(255, 0, 60, 0.1);
+    text-shadow: 0 0 10px var(--accent-secondary);
+  }
+
+  .hero-text p {
+    color: var(--text-secondary);
+    font-size: 1.15rem;
+    line-height: 1.7;
+    margin-bottom: 30px;
+    max-width: 500px;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .cyber-btn {
+    position: relative;
+    padding: 12px 30px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent-color);
+    background: transparent;
+    border: 1px solid var(--accent-color);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s;
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+    overflow: hidden;
+  }
+
+  .cyber-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--accent-color);
+    transition: left 0.3s;
+    z-index: -1;
+  }
+
+  .cyber-btn:hover {
+    color: var(--bg-dark);
+    box-shadow: 0 0 25px var(--accent-glow);
+  }
+
+  .cyber-btn:hover::before {
+    left: 0;
+  }
+
+  .cyber-btn.secondary {
+    color: var(--accent-secondary);
+    border-color: var(--accent-secondary);
+  }
+
+  .cyber-btn.secondary::before {
+    background: var(--accent-secondary);
+  }
+
+  .cyber-btn.secondary:hover {
+    box-shadow: 0 0 25px rgba(255, 0, 60, 0.5);
+  }
+
+  /* Hero Profile Image */
+  .hero-profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  .profile-frame {
+    position: relative;
+    width: 350px;
+    height: 350px;
+    max-width: 100%;
+  }
+
+  .profile-frame::before {
+    content: '';
+    position: absolute;
+    inset: -20px;
+    border: 1px solid var(--accent-color);
+    clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
+  }
+
+  .profile-frame::after {
+    content: '';
+    position: absolute;
+    inset: -10px;
+    border: 1px solid var(--accent-secondary);
+    clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+    opacity: 0.5;
+  }
+
+  .profile-img-container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
+    position: relative;
+    background: var(--bg-panel);
+  }
+
+  .profile-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: contrast(1.1) saturate(1.2) hue-rotate(-10deg);
+  }
+
+  .profile-corner {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border: 2px solid var(--accent-color);
+    box-shadow: 0 0 10px var(--accent-glow);
+  }
+
+  .profile-corner.tl { top: -20px; left: -20px; border-right: none; border-bottom: none; }
+  .profile-corner.tr { top: -20px; right: -20px; border-left: none; border-bottom: none; }
+  .profile-corner.bl { bottom: -20px; left: -20px; border-right: none; border-top: none; }
+  .profile-corner.br { bottom: -20px; right: -20px; border-left: none; border-top: none; }
+
+  /* ===== SECTIONS ===== */
+  section {
+    position: relative;
+    z-index: 2;
+    padding: 80px 40px;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  .section-header h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    letter-spacing: 3px;
+    position: relative;
+    display: inline-block;
+  }
+
+  .section-header h2 span {
+    color: var(--accent-color);
+  }
+
+  .section-header h2::before {
+    content: '// ';
+    color: var(--accent-secondary);
+    font-family: 'Share Tech Mono', monospace;
+  }
+
+  .section-line {
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+    margin: 15px auto 0;
+    box-shadow: 0 0 10px var(--accent-glow);
+  }
+
+  /* ===== STATS SECTION ===== */
+  .stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .stat-card {
+    flex: 1;
+    min-width: 180px;
+    max-width: 250px;
+    background: var(--bg-panel);
+    border: 1px solid var(--border-glow);
+    padding: 30px;
+    text-align: center;
+    clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--accent-color);
+    box-shadow: 0 0 15px var(--accent-glow);
+  }
+
+  .stat-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-color);
+    box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+  }
+
+  .stat-icon {
+    font-size: 2rem;
+    color: var(--accent-color);
+    margin-bottom: 10px;
+    text-shadow: 0 0 15px var(--accent-glow);
+  }
+
+  .stat-value {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-shadow: 0 0 20px var(--accent-glow);
+  }
+
+  .stat-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 5px;
+  }
+
+  /* ===== PROJECTS ===== */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .project-card {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-glow);
+    padding: 25px;
+    position: relative;
+    transition: transform 0.1s ease-out, box-shadow 0.3s, border-color 0.3s;
+    transform-style: preserve-3d;
+    clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+    overflow: hidden;
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--accent-color);
+    box-shadow: 0 0 15px var(--accent-glow);
+  }
+
+  .project-card:hover {
+    border-color: var(--accent-color);
+    box-shadow: 0 15px 40px rgba(0, 212, 255, 0.25);
+  }
+
+  .project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+  }
+
+  .project-name {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    text-decoration: none;
+    text-shadow: 0 0 10px var(--accent-dim);
+    word-break: break-all;
+  }
+
+  .project-name:hover {
+    text-shadow: 0 0 20px var(--accent-glow);
+  }
+
+  .project-stars {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--accent-secondary);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+    margin-left: 10px;
+  }
+
+  .project-desc {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    flex-grow: 1;
+  }
+
+  .project-desc em {
+    color: var(--text-secondary);
+    font-style: italic;
+    opacity: 0.7;
+  }
+
+  .project-lang {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
+
+  .lang-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent-color);
+    box-shadow: 0 0 8px var(--accent-glow);
+  }
+
+  /* ===== CONTACT / SOCIAL ===== */
+  .contact {
+    text-align: center;
+  }
+
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+  }
+
+  .social-link {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-panel);
+    border: 1px solid var(--border-glow);
+    color: var(--accent-color);
+    font-size: 1.5rem;
+    text-decoration: none;
+    transition: all 0.3s;
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .social-link::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--accent-color);
+    transform: translateY(100%);
+    transition: transform 0.3s;
+    z-index: 0;
+  }
+
+  .social-link i {
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s;
+  }
+
+  .social-link:hover::before {
+    transform: translateY(0);
+  }
+
+  .social-link:hover i {
+    color: var(--bg-dark);
+  }
+
+  .social-link:hover {
+    box-shadow: 0 0 25px var(--accent-glow);
+    transform: translateY(-5px);
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 30px 40px;
+    border-top: 1px solid var(--border-glow);
+    background: rgba(5, 5, 16, 0.8);
+  }
+
+  footer p {
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+  }
+
+  footer p span {
+    color: var(--accent-secondary);
+  }
+
+  /* ===== LOADING / ERROR STATES ===== */
+  .loading {
+    text-align: center;
+    padding: 40px;
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--accent-color);
+    font-size: 1rem;
+  }
+
+  .loading::after {
+    content: '...';
+    animation: dots 1.5s infinite;
+  }
+
+  @keyframes dots {
+    0%, 20% { content: '.'; }
+    40% { content: '..'; }
+    60%, 100% { content: '...'; }
+  }
+
+  .error-msg {
+    text-align: center;
+    padding: 40px;
+    color: var(--accent-secondary);
+    font-family: 'Share Tech Mono', monospace;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 900px) {
+    .hero-content {
+      grid-template-columns: 1fr;
+      gap: 40px;
+      text-align: center;
+    }
+
+    .hero-text p {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-cta {
+      justify-content: center;
+    }
+
+    .hero-profile {
+      order: -1;
+    }
+
+    .profile-frame {
+      width: 250px;
+      height: 250px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    nav {
+      padding: 15px 20px;
+    }
+
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      flex-direction: column;
+      background: rgba(5, 5, 16, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 20px;
+      gap: 15px;
+      border-bottom: 1px solid var(--border-glow);
+    }
+
+    .nav-links.open {
+      display: flex;
+    }
+
+    .menu-toggle {
+      display: flex;
+    }
+
+    section {
+      padding: 60px 20px;
+    }
+
+    .hero {
+      padding: 120px 20px 40px;
+    }
+
+    .stats {
+      gap: 20px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .stat-card {
+      min-width: 140px;
+      padding: 20px;
+    }
+
+    .stat-value {
+      font-size: 2rem;
+    }
+
+    .social-link {
+      width: 50px;
+      height: 50px;
+      font-size: 1.2rem;
+    }
+  }
+
+  /* ===== GSAP initial states ===== */
+  .fade-in {
+    opacity: 0;
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== CUSTOM CURSOR ===== -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- ===== BACKGROUND EFFECTS ===== -->
+<div class="cyber-grid"></div>
+<div class="cyber-scanline"></div>
+<div class="glow-orb glow-orb-1"></div>
+<div class="glow-orb glow-orb-2"></div>
+
+<!-- ===== NAVIGATION ===== -->
+<nav id="navbar">
+  <div class="nav-logo">SAISH<span>_</span>SOPTE</div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#hero">[ Home ]</a></li>
+    <li><a href="#stats">[ Stats ]</a></li>
+    <li><a href="#projects">[ Projects ]</a></li>
+    <li><a href="#contact">[ Contact ]</a></li>
+  </ul>
+  <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero">
+  <div class="hero-content">
+    <div class="hero-text">
+      <span class="hero-tag fade-in">&#60; Full Stack Developer /&#62;</span>
+      <h1 class="fade-in">SAISH <span class="glitch" data-text="SOPTE">SOPTE</span></h1>
+      <p class="fade-in">
+        Developer and technology enthusiast building in the digital frontier.
+        Passionate about crafting clean, efficient code and exploring the boundaries
+        of web technology. Currently sharpening skills and shipping projects on GitHub.
+        Based in Goa, India — always ready to tackle the next challenge.
+      </p>
+      <div class="hero-cta fade-in">
+        <a href="#projects" class="cyber-btn"><i class="fas fa-code"></i> View Projects</a>
+        <a href="#contact" class="cyber-btn secondary"><i class="fas fa-terminal"></i> Get In Touch</a>
+      </div>
+    </div>
+    <div class="hero-profile fade-in">
+      <div class="profile-frame">
+        <div class="profile-img-container">
+          <img id="heroAvatar" src="https://avatars.githubusercontent.com/u/234112618?v=4" alt="Saish Sopte">
+        </div>
+        <div class="profile-corner tl"></div>
+        <div class="profile-corner tr"></div>
+        <div class="profile-corner bl"></div>
+        <div class="profile-corner br"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STATS ===== -->
+<section id="stats">
+  <div class="section-header">
+    <h2>System <span>Stats</span></h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="stats" id="statsContainer">
+    <div class="stat-card">
+      <div class="stat-icon"><i class="fas fa-folder"></i></div>
+      <div class="stat-value" id="statRepos">--</div>
+      <div class="stat-label">Public Repos</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon"><i class="fas fa-users"></i></div>
+      <div class="stat-value" id="statFollowers">--</div>
+      <div class="stat-label">Followers</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon"><i class="fas fa-user-plus"></i></div>
+      <div class="stat-value" id="statFollowing">--</div>
+      <div class="stat-label">Following</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon"><i class="fas fa-calendar-alt"></i></div>
+      <div class="stat-value" id="statYear">--</div>
+      <div class="stat-label">Member Since</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROJECTS ===== -->
+<section id="projects">
+  <div class="section-header">
+    <h2>Featured <span>Projects</span></h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="projects-grid" id="projectsGrid">
+    <div class="loading">Fetching repositories from GitHub</div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact" class="contact">
+  <div class="section-header">
+    <h2>Establish <span>Connection</span></h2>
+    <div class="section-line"></div>
+  </div>
+  <p style="color: var(--text-secondary); font-size: 1.1rem; max-width: 500px; margin: 0 auto;">
+    Let's connect and build something extraordinary. Reach out through any of the channels below.
+  </p>
+  <div class="social-links">
+    <a href="https://github.com/23co54-ops" target="_blank" rel="noopener" class="social-link" aria-label="GitHub">
+      <i class="fab fa-github"></i>
+    </a>
+    <a href="https://www.linkedin.com/in/saish-sopte-000b71271" target="_blank" rel="noopener" class="social-link" aria-label="LinkedIn">
+      <i class="fab fa-linkedin"></i>
+    </a>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <p>&copy; <span id="footerYear">2026</span> SAISH SOPTE // BUILT WITH <span>&#60;CODE&#62;</span> IN GOA</p>
+</footer>
+
+<!-- ===== GSAP ===== -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<script>
+(function () {
+  "use strict";
+
+  // ===== CONFIG =====
+  var GITHUB_USERNAME = "23co54-ops";
+  var LINKEDIN_URL = "https://www.linkedin.com/in/saish-sopte-000b71271";
+
+  // ===== FOOTER YEAR =====
+  document.getElementById("footerYear").textContent = new Date().getFullYear();
+
+  // ===== CUSTOM CURSOR =====
+  var cursorDot = document.getElementById("cursorDot");
+  var cursorRing = document.getElementById("cursorRing");
+  var mouseX = 0, mouseY = 0;
+  var ringX = 0, ringY = 0;
+
+  document.addEventListener("mousemove", function (e) {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    cursorDot.style.left = mouseX + "px";
+    cursorDot.style.top = mouseY + "px";
+  });
+
+  // Smooth ring follow
+  function animateRing() {
+    ringX += (mouseX - ringX) * 0.15;
+    ringY += (mouseY - ringY) * 0.15;
+    cursorRing.style.left = ringX + "px";
+    cursorRing.style.top = ringY + "px";
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  // Hover morph on clickable elements
+  var hoverables = document.querySelectorAll("a, button, .project-card, .stat-card, .social-link");
+  hoverables.forEach(function (el) {
+    el.addEventListener("mouseenter", function () {
+      cursorDot.classList.add("hovering");
+      cursorRing.classList.add("hovering");
+    });
+    el.addEventListener("mouseleave", function () {
+      cursorDot.classList.remove("hovering");
+      cursorRing.classList.remove("hovering");
+    });
+  });
+
+  // ===== NAVBAR SCROLL =====
+  var navbar = document.getElementById("navbar");
+  window.addEventListener("scroll", function () {
+    if (window.scrollY > 50) {
+      navbar.classList.add("scrolled");
+    } else {
+      navbar.classList.remove("scrolled");
+    }
+  });
+
+  // ===== MOBILE MENU =====
+  var menuToggle = document.getElementById("menuToggle");
+  var navLinks = document.getElementById("navLinks");
+  menuToggle.addEventListener("click", function () {
+    navLinks.classList.toggle("open");
+  });
+  // Close menu on link click
+  navLinks.querySelectorAll("a").forEach(function (link) {
+    link.addEventListener("click", function () {
+      navLinks.classList.remove("open");
+    });
+  });
+
+  // ===== GSAP HERO ENTRANCE =====
+  if (window.gsap) {
+    gsap.to(".fade-in", {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      stagger: 0.2,
+      ease: "power3.out",
+      delay: 0.3
+    });
+  } else {
+    // Fallback if GSAP fails to load
+    document.querySelectorAll(".fade-in").forEach(function (el) {
+      el.style.opacity = "1";
+    });
+  }
+
+  // ===== GSAP SCROLL ANIMATIONS =====
+  if (window.gsap && window.ScrollTrigger) {
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Stats cards
+    gsap.from(".stat-card", {
+      scrollTrigger: {
+        trigger: "#stats",
+        start: "top 80%"
+      },
+      opacity: 0,
+      y: 50,
+      duration: 0.8,
+      stagger: 0.15,
+      ease: "power2.out"
+    });
+
+    // Section headers
+    gsap.from(".section-header", {
+      scrollTrigger: {
+        trigger: "#projects",
+        start: "top 85%"
+      },
+      opacity: 0,
+      y: 30,
+      duration: 0.8,
+      ease: "power2.out"
+    });
+  }
+
+  // ===== 3D TILT ON PROJECT CARDS =====
+  function attachTilt(card) {
+    card.addEventListener("mousemove", function (e) {
+      var rect = card.getBoundingClientRect();
+      var x = e.clientX - rect.left;
+      var y = e.clientY - rect.top;
+      var centerX = rect.width / 2;
+      var centerY = rect.height / 2;
+      var rotateX = ((y - centerY) / centerY) * -8;
+      var rotateY = ((x - centerX) / centerX) * 8;
+      card.style.transform =
+        "perspective(800px) rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg) translateY(-5px)";
+    });
+    card.addEventListener("mouseleave", function () {
+      card.style.transform = "perspective(800px) rotateX(0) rotateY(0) translateY(0)";
+    });
+  }
+
+  // ===== GITHUB API FETCH =====
+  function fetchGitHubData() {
+    // Fetch user profile
+    fetch("https://api.github.com/users/" + GITHUB_USERNAME)
+      .then(function (res) {
+        if (!res.ok) throw new Error("User fetch failed");
+        return res.json();
+      })
+      .then(function (user) {
+        // Update avatar
+        if (user.avatar_url) {
+          document.getElementById("heroAvatar").src = user.avatar_url;
+        }
+
+        // Update stats
+        if (user.public_repos !== undefined) {
+          animateNumber("statRepos", user.public_repos);
+        }
+        if (user.followers !== undefined) {
+          animateNumber("statFollowers", user.followers);
+        }
+        if (user.following !== undefined) {
+          animateNumber("statFollowing", user.following);
+        }
+        if (user.created_at) {
+          var year = new Date(user.created_at).getFullYear();
+          document.getElementById("statYear").textContent = year;
+        }
+      })
+      .catch(function (err) {
+        console.error("GitHub user fetch error:", err);
+      });
+
+    // Fetch repos
+    fetch("https://api.github.com/users/" + GITHUB_USERNAME + "/repos?sort=stars&per_page=6")
+      .then(function (res) {
+        if (!res.ok) throw new Error("Repos fetch failed");
+        return res.json();
+      })
+      .then(function (repos) {
+        renderProjects(repos);
+      })
+      .catch(function (err) {
+        console.error("GitHub repos fetch error:", err);
+        document.getElementById("projectsGrid").innerHTML =
+          '<div class="error-msg">[ ERROR ] Failed to load repositories. Please try again later.</div>';
+      });
+  }
+
+  // ===== ANIMATE NUMBERS =====
+  function animateNumber(id, target) {
+    var el = document.getElementById(id);
+    var current = 0;
+    var step = Math.max(1, Math.ceil(target / 30));
+    var interval = setInterval(function () {
+      current += step;
+      if (current >= target) {
+        current = target;
+        clearInterval(interval);
+      }
+      el.textContent = current;
+    }, 30);
+  }
+
+  // ===== RENDER PROJECTS =====
+  // Language colors
+  var langColors = {
+    JavaScript: "#f1e05a",
+    TypeScript: "#3178c6",
+    Python: "#3572A5",
+    HTML: "#e34c26",
+    CSS: "#563d7c",
+    Java: "#b07219",
+    "C++": "#f34b7d",
+    C: "#555555",
+    "C#": "#178600",
+    Go: "#00ADD8",
+    Rust: "#dea584",
+    PHP: "#4F5D95",
+    Ruby: "#701516",
+    Swift: "#F05138",
+    Kotlin: "#A97BFF",
+    Dart: "#00B4AB",
+    Shell: "#89e051",
+    Vue: "#41b883",
+    Svelte: "#ff3e00",
+    Jupyter: "#DA5B0B"
+  };
+
+  function getLangColor(lang) {
+    if (!lang) return "#00d4ff";
+    return langColors[lang] || "#00d4ff";
+  }
+
+  function renderProjects(repos) {
+    var grid = document.getElementById("projectsGrid");
+
+    if (!repos || repos.length === 0) {
+      grid.innerHTML = '<div class="error-msg">[ NO DATA ] No public repositories found.</div>';
+      return;
+    }
+
+    // Sort by stars descending
+    repos.sort(function (a, b) {
+      return (b.stargazers_count || 0) - (a.stargazers_count || 0);
+    });
+
+    grid.innerHTML = "";
+    var html = "";
+
+    repos.forEach(function (repo) {
+      var desc = repo.description
+        ? escapeHtml(repo.description)
+        : "<em>No description provided</em>";
+      var lang = repo.language || "Unknown";
+      var langColor = getLangColor(repo.language);
+      var stars = repo.stargazers_count || 0;
+      var forks = repo.forks_count || 0;
+
+      html +=
+        '<div class="project-card reveal">' +
+          '<div class="project-header">' +
+            '<a href="' + repo.html_url + '" target="_blank" rel="noopener" class="project-name">' +
+              escapeHtml(repo.name) +
+            "</a>" +
+            '<div class="project-stars">' +
+              '<i class="fas fa-star"></i> ' + stars +
+            "</div>" +
+          "</div>" +
+          '<div class="project-desc">' + desc + "</div>" +
+          '<div class="project-lang">' +
+            '<span class="lang-dot" style="background:' + langColor + ";box-shadow:0 0 8px " + langColor + '"></span>' +
+            "<span>" + escapeHtml(lang) + "</span>" +
+            '<span style="margin-left:auto;color:var(--text-secondary)">' +
+              '<i class="fas fa-code-branch"></i> ' + forks +
+            "</span>" +
+          "</div>" +
+        "</div>";
+    });
+
+    grid.innerHTML = html;
+
+    // Attach 3D tilt to each card
+    document.querySelectorAll(".project-card").forEach(function (card) {
+      attachTilt(card);
+    });
+
+    // GSAP scroll-triggered reveal for project cards
+    if (window.gsap && window.ScrollTrigger) {
+      gsap.from(".project-card", {
+        scrollTrigger: {
+          trigger: "#projectsGrid",
+          start: "top 85%"
+        },
+        opacity: 0,
+        y: 60,
+        duration: 0.8,
+        stagger: 0.12,
+        ease: "power2.out"
+      });
+    }
+
+    // Re-attach cursor hover for dynamically created elements
+    var newHoverables = document.querySelectorAll(".project-card, .project-name");
+    newHoverables.forEach(function (el) {
+      el.addEventListener("mouseenter", function () {
+        cursorDot.classList.add("hovering");
+        cursorRing.classList.add("hovering");
+      });
+      el.addEventListener("mouseleave", function () {
+        cursorDot.classList.remove("hovering");
+        cursorRing.classList.remove("hovering");
+      });
+    });
+  }
+
+  // ===== UTIL: ESCAPE HTML =====
+  function escapeHtml(str) {
+    if (!str) return "";
+    var e = String.fromCharCode(38);
+    return str
+      .replace(/&/g, e + "amp;")
+      .replace(/</g, e + "lt;")
+      .replace(/>/g, e + "gt;")
+      .replace(/"/g, e + "quot;")
+      .replace(/'/g, e + "#039;");
+  }
+
+  // ===== INIT =====
+  fetchGitHubData();
+})();
+</script>
+
+</body>
+</html>
